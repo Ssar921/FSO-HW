@@ -13,11 +13,11 @@ const Statistics = ({ good, bad, neutral }) => {
 	const allFeedback = good + neutral + bad;
 
 	if (allFeedback === 0) {
-		return <p>No feedback yet</p>;
+		return <p>No feedback given</p>;
 	}
 
 	const avg = (good - bad) / allFeedback;
-	const positive = `${good / allFeedback} %`;
+	const positive = `${(good / allFeedback) * 100} %`;
 
 	return (
 		<>
