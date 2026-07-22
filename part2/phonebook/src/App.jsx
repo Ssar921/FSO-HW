@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
+import personServices from "./services/persons";
 
 const App = () => {
 	const [persons, setPersons] = useState([]);
@@ -10,16 +10,22 @@ const App = () => {
 	const [newNumber, setNewNumber] = useState("");
 	const [newFilter, setNewFilter] = useState("");
 
-	const fetchInfo = () => {
-		axios
-			.get("http://localhost:3001/persons")
-			.then((response) => setPersons(response.data));
-	};
-
-	useEffect(fetchInfo, []);
+	useEffect(() => {
+		personServices.getAll().then((persons) => setPersons(persons));
+	}, []);
 
 	const handleFilterChange = (event) => {
 		setNewFilter(event.target.value);
+	};
+
+	const handleDelete = (id) => {
+		const filteredPerson = persons.find((item) => item.id === id);
+
+		if (window.confirm(`Delete ${filteredPerson.name}`)) {
+			personServices.deleteItem(id).then((item) => {
+				setPersons(persons.filter((item) => item.id !== id));
+			});
+		}
 	};
 
 	const numbersToShow =
@@ -49,7 +55,10 @@ const App = () => {
 			/>
 
 			<h2>Numbers</h2>
-			<Persons numbersToShow={numbersToShow} />
+			<Persons
+				numbersToShow={numbersToShow}
+				handleDelete={handleDelete}
+			/>
 		</div>
 	);
 };

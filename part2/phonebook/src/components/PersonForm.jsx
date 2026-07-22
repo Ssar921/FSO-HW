@@ -1,3 +1,5 @@
+import personServices from "../services/persons";
+
 const PersonForm = ({
 	newName,
 	newNumber,
@@ -14,6 +16,11 @@ const PersonForm = ({
 		setNewNumber(event.target.value);
 	};
 
+	const clearInputs = () => {
+		setNewName("");
+		setNewNumber("");
+	};
+
 	const addPerson = (event) => {
 		event.preventDefault();
 
@@ -21,13 +28,30 @@ const PersonForm = ({
 			(person) => person.name === newName,
 		);
 
+		const newPerson = { name: newName, number: newNumber };
+
+		const confirmPrompt = `${newName} is already added to phonebook, replace the old number with a new one?`;
+
 		if (existingPerson) {
-			window.alert(`${newName} is already added to phonebook`);
+			if (window.confirm(confirmPrompt)) {
+				personServices
+					.update(existingPerson.id, newPerson)
+					.then((response) =>
+						setPersons(
+							persons.map((person) =>
+								person.id === response.id ? response : person,
+							),
+						),
+					);
+			}
+			clearInputs();
 			return;
 		}
-		const newPerson = { name: newName, number: newNumber };
-		setPersons(persons.concat(newPerson));
-		setNewName("");
+
+		personServices.create(newPerson).then((newPersons) => {
+			setPersons(persons.concat(newPersons));
+			clearInputs();
+		});
 	};
 
 	return (
