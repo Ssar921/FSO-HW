@@ -1,9 +1,8 @@
-const Filter = ({ newFilter, handleFilterChange }) => {
+const Filter = ({ value, onChange }) => {
 	return (
-		<div>
-			find people:{" "}
-			<input value={newFilter} onChange={handleFilterChange} />
-		</div>
+		<>
+			find: <input value={value} onChange={onChange} />
+		</>
 	);
 };
 
