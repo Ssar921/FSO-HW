@@ -86,11 +86,13 @@ const App = () => {
 						persons.filter((person) => person.id !== response.id),
 					),
 				)
-				.catch((error) =>
-					showMessage(
-						`Information of ${newName} has already been removed from server`,
-						"error",
-					),
+				.catch(
+					(error) =>
+						showMessage(
+							`Information of ${person.name} has already been removed from server`,
+							"error",
+						),
+					setPersons(persons.filter((p) => p.id !== person.id)),
 				);
 		} else {
 			return;
