@@ -4,6 +4,10 @@ var morgan = require("morgan");
 const app = express();
 
 app.use(express.json());
+// app.use(express.static("dist"));
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "dist")));
 
 morgan.token("body", (req) => {
 	return JSON.stringify(req.body);
@@ -105,8 +109,6 @@ app.delete("/api/persons/:id", (request, response) => {
 	numbers = numbers.filter((person) => person.id !== id);
 	response.status(204).end;
 });
-
-app.use(express.static("dist"));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
