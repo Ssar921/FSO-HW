@@ -2,7 +2,7 @@ POST http://localhost:3001/api/numbers/
 content-type: application/json
 
 {
-    "name": "",
+    "name": "123dsfssdad",
     "number": "123"
 }
 
