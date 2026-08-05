@@ -4,6 +4,7 @@ var morgan = require("morgan");
 const app = express();
 
 app.use(express.json());
+console.log("Serving dist");
 app.use(express.static("dist"));
 
 morgan.token("body", (req) => {
