@@ -1,6 +1,10 @@
 const express = require("express");
 var morgan = require("morgan");
+const cors = require("cors");
+
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -53,11 +57,11 @@ app.get("/info", (request, response) => {
 	response.send(info);
 });
 
-app.get("/api/numbers", (request, response) => {
+app.get("/api/persons", (request, response) => {
 	response.json(numbers);
 });
 
-app.get("/api/numbers/:id", (request, response) => {
+app.get("/api/persons/:id", (request, response) => {
 	const id = request.params.id;
 	const number = numbers.find((person) => person.id === id);
 
@@ -69,7 +73,7 @@ app.get("/api/numbers/:id", (request, response) => {
 	}
 });
 
-app.post("/api/numbers", (request, response) => {
+app.post("/api/persons", (request, response) => {
 	const body = request.body;
 
 	if (!body.name || !body.number) {
@@ -99,13 +103,13 @@ app.post("/api/numbers", (request, response) => {
 	response.json(number);
 });
 
-app.delete("/api/numbers/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response) => {
 	const id = request.params.id;
 	numbers = numbers.filter((person) => person.id !== id);
 	response.status(204).end;
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });

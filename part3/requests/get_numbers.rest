@@ -1,1 +1,4 @@
-GET http://localhost:3001/api/numbers/
+GET http://localhost:3001/api/persons/
+
+###
+GET https://phonebook-be-opal.vercel.app/api/persons
