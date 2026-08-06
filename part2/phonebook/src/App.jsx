@@ -59,10 +59,15 @@ const App = () => {
 			const newPerson = { name: newName, number: newNumber };
 			personServices
 				.create(newPerson)
-				.then((person) => setPersons(persons.concat(person)));
-			showMessage(`Added ${newName}.`, "success");
+				.then((person) => {
+					setPersons(persons.concat(person));
+					showMessage(`Added ${newName}.`, "success");
+				})
+				.catch((error) => {
+					showMessage(error.response.data.error, "error");
+					console.log(error.response.data.error);
+				});
 		}
-
 		resetForm();
 	};
 
