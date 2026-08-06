@@ -62,10 +62,6 @@ app.post("/api/persons", (request, response) => {
 		});
 	}
 
-	const exists = numbers.find(
-		(number) => number.name.toLowerCase() === body.name.toLowerCase(),
-	);
-
 	const person = new Person({
 		name: body.name,
 		number: body.number,
