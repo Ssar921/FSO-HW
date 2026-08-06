@@ -5,8 +5,11 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"dev": "node --watch index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev2": "node --watch index.js",
+		"dev": "nodemon --inspect index.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"kill-node": "taskkill /F /IM node.exe",
+		"dev-clean": "npm run kill-node && npm run dev2"
 	},
 	"author": "Ssar921",
 	"license": "MIT",
@@ -15,5 +18,8 @@
 		"express": "^5.2.1",
 		"mongoose": "^9.9.1",
 		"morgan": "^1.11.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.14"
 	}
 }

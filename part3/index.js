@@ -19,48 +19,21 @@ app.use(
 	),
 );
 
-let numbers = [
-	{
-		id: "1",
-		name: "Arto Hellas",
-		number: "040-123456",
-	},
-	{
-		id: "2",
-		name: "Ada Lovelace",
-		number: "39-44-5323523",
-	},
-	{
-		id: "3",
-		name: "Dan Abramov",
-		number: "12-43-234345",
-	},
-	{
-		id: "4",
-		name: "Mary Poppendieck",
-		number: "39-23-6423122",
-	},
-	{
-		id: "44",
-		name: "Deleter",
-		number: "39rrr-23-6423122",
-	},
-];
-
 app.get("/", (request, response) => {
 	response.send("<h1>Hello World!</h1>");
 });
 
 app.get("/info", (request, response) => {
-	const info = `
-    <p>Phonebook has info for ${numbers.length} people.</p>
-    <p>${new Date()}</p>
-    `;
-	response.send(info);
+	Person.find({}).then((people) => {
+		const info = `
+			<p>Phonebook has info for ${people.length} people.</p>
+			<p>${new Date()}</p>
+		`;
+		response.send(info);
+	});
 });
 
 app.get("/api/persons", (request, response) => {
-	// response.json(numbers);
 	Person.find({}).then((people) => {
 		response.json(people);
 	});
@@ -72,23 +45,11 @@ app.get("/api/persons/:id", (request, response, next) => {
 			if (person) {
 				response.json(person);
 			} else {
-				response.statusMessage = `cant find ${id}`;
+				response.statusMessage = `cant find ${request.params.id}`;
 				response.status(404).end();
 			}
 		})
 		.catch((error) => next(error));
-	// .catch((error) => {
-	// 	console.log(error);
-	// 	response.status(400).send({ error: "malformatted id" });
-	// });
-
-	// const number = numbers.find((person) => person.id === request.params.id);
-	// if (number) {
-	// 	response.json(number);
-	// } else {
-	// 	response.statusMessage = "No number found";
-	// 	response.status(404).end();
-	// }
 });
 
 app.post("/api/persons", (request, response) => {
@@ -105,39 +66,13 @@ app.post("/api/persons", (request, response) => {
 		(number) => number.name.toLowerCase() === body.name.toLowerCase(),
 	);
 
-	if (exists) {
-		// return response.status(400).json({
-		// 	error: `Entry with ${body.name} already exists`,
-		// });
-		Person.findById(request.params.id)
-			.then((person) => {
-				if (!person) {
-					return response.status(404).end();
-				}
-
-				person.name = body.name;
-				person.number = body.number;
-
-				return person.save().then((updatedPerson) => {
-					response.json(updatedPerson);
-				});
-			})
-			.catch((error) => next(error));
-	}
-
-	// const genId = Math.floor(Math.random() * 10000);
-	// const number = {
-	// 	id: genId,
-	// 	name: body.name,
-	// 	number: body.number,
-	// };
-	// numbers.concat(number);
-
 	const person = new Person({
 		name: body.name,
 		number: body.number,
 	});
-	person.save().then((savedPerson) => response.json(savedPerson));
+	person.save().then((savedPerson) => {
+		response.json(savedPerson);
+	});
 });
 
 app.put("/api/persons/:id", (request, response, next) => {
@@ -160,14 +95,10 @@ app.put("/api/persons/:id", (request, response, next) => {
 });
 
 app.delete("/api/persons/:id", (request, response, next) => {
-	// const id = request.params.id;
-	// numbers = numbers.filter((person) => person.id !== id);
-	// response.status(204).end;
-
 	Person.findByIdAndDelete(request.params.id)
 		.then((result) => {
 			response.json(result);
-			// response.status(204).end();
+			response.status(204).end();
 		})
 		.catch((error) => next(error));
 });

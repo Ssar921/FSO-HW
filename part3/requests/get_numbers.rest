@@ -4,7 +4,7 @@ GET http://localhost:3001/api/persons/
 GET https://phonebook-be-opal.vercel.app/api/persons
 
 ###
-GET http://localhost:3001/api/persons/6a735d483ac5ffc58991db16/
+GET http://localhost:3001/api/persons/6a74514a2d986a8d8310e9ba/
 
 
 ###

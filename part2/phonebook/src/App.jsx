@@ -41,11 +41,18 @@ const App = () => {
 		if (existingPerson) {
 			if (window.confirm(confirmPrompt)) {
 				const editedPerson = { name: newName, number: newNumber };
-				setPersons(
-					persons.map((person) =>
-						person.id === existingPerson.id ? editedPerson : person,
-					),
-				);
+				personServices
+					.update(existingPerson.id, editedPerson)
+					.then((updatedPerson) => {
+						setPersons(
+							persons.map((person) =>
+								person.id === existingPerson.id
+									? updatedPerson
+									: person,
+							),
+						);
+					});
+
 				showMessage(`Edited ${newName}'s number.`, "success");
 			}
 		} else {
