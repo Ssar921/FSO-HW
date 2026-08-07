@@ -6,6 +6,7 @@
 	"scripts": {
 		"start": "node index.js",
 		"dev2": "node --watch index.js",
+		"lint": "eslint .",
 		"dev": "nodemon --inspect index.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"kill-node": "taskkill /F /IM node.exe",
@@ -20,6 +21,10 @@
 		"morgan": "^1.11.0"
 	},
 	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@stylistic/eslint-plugin": "^5.10.0",
+		"eslint": "^10.8.0",
+		"globals": "^17.9.0",
 		"nodemon": "^3.1.14"
 	}
 }
