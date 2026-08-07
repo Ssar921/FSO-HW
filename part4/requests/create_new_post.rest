@@ -2,9 +2,9 @@ POST http://localhost:3003/api/blogs/
 content-type: application/json
 
 {
-    "title": "My First Blog Post",
-	"author": "Shafaq Sarfraz",
-	"url": "http://blogspot.com",
-	"likes": "24"
+    "title": "The Next Blog Post",
+	"author": "Aliza Khan",
+	"url": "http://blogspot-aliza.com",
+	"likes": "13"
 }
 
