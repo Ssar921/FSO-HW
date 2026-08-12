@@ -7,13 +7,14 @@
 		"dev": "node --watch index.js",
 		"start": "node index.js",
 		"kill-node": "taskkill /F /IM node.exe",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "node --test"
 	},
 	"author": "Ssar921",
 	"license": "MIT",
 	"dependencies": {
 		"dotenv": "^17.4.2",
 		"express": "^5.2.1",
+		"lodash": "^4.18.1",
 		"mongoose": "^9.9.1"
 	}
 }
