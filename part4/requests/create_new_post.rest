@@ -2,9 +2,8 @@ POST http://localhost:3003/api/blogs/
 content-type: application/json
 
 {
-    "title": "The Next Blog Post",
-	"author": "Aliza Khan",
-	"url": "http://blogspot-aliza.com",
-	"likes": "13"
+	"author": "Async Await",
+	"url": "http://async-await.com",
+	"likes": "14"
 }
 

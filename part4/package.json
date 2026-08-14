@@ -4,17 +4,21 @@
 	"description": "Blogs",
 	"main": "index.js",
 	"scripts": {
-		"dev": "node --watch index.js",
-		"start": "node index.js",
+		"dev": "cross-env NODE_ENV=development node --watch index.js",
+		"start": "cross-env NODE_ENV=production node index.js",
 		"kill-node": "taskkill /F /IM node.exe",
-		"test": "node --test"
+		"test": "cross-env NODE_ENV=test node --test"
 	},
 	"author": "Ssar921",
 	"license": "MIT",
 	"dependencies": {
+		"cross-env": "^10.1.0",
 		"dotenv": "^17.4.2",
 		"express": "^5.2.1",
 		"lodash": "^4.18.1",
 		"mongoose": "^9.9.1"
+	},
+	"devDependencies": {
+		"supertest": "^7.2.2"
 	}
 }
