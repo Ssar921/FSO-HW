@@ -12,7 +12,11 @@ const blogSchema = new mongoose.Schema({
 		required: true,
 		minLength: 2,
 	},
-	likes: Number,
+	likes: {
+		type: Number,
+		default: 0,
+		min: [0, "Likes can't be negative"],
+	},
 });
 
 blogSchema.set("toJSON", {

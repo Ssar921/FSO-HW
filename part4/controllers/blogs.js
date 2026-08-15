@@ -27,4 +27,15 @@ blogsRouter.get("/:id", async (request, response) => {
 	}
 });
 
+blogsRouter.put("/:id", async (request, response) => {
+	const newPerson = await Blog.findByIdAndUpdate(
+		request.params.id,
+		request.body,
+		{
+			returnDocument: "after",
+		},
+	);
+	response.json(newPerson);
+});
+
 module.exports = blogsRouter;
