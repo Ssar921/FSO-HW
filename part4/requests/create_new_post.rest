@@ -1,9 +1,12 @@
 POST http://localhost:3003/api/blogs/
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yWW9sbyIsImlkIjoiNmE4YTcwMGMxZWJlOWZjMTRiM2ViZTRlIiwiaWF0IjoxNzg3NDU3OTEzfQ.-3-AGKW27iTYwy-yg83AgGT9DeMjP9V7F0LggMAjtZA
 
 {
-	"title": "Hello There",
-	"author": "Mr Hello",
-	"url": "http://ellodere.com"
+	"title": "Token Auth Test Successful",
+	"author": "Shafaq Sarfraz",
+	"url": "http://tokenauth.com",
+	"likes": 10,
+	"userId": "6a8a700c1ebe9fc14b3ebe4e"
 }
 

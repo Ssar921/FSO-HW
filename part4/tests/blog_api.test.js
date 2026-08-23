@@ -11,7 +11,7 @@ const api = supertest(app);
 beforeEach(async () => {
 	await Blog.deleteMany({});
 
-	// Keeps saving is there is error in one save
+	// Keeps saving if there is error in one save
 	// let blogObject = helper.initialPosts.map((post) => new Blog(post));
 	// const promiseArray = blogObject.map((post) => post.save());
 	// await Promise.all(promiseArray);
