@@ -8,4 +8,15 @@ content-type: application/json
 }
 
 ###
+POST http://localhost:3003/api/users/
+content-type: application/json
+
+{
+	"name": "Hamza Sarfraz",
+	"username": "HamzaSar",
+	"password": "hamzasar"
+}
+
+
+###
 GET http://localhost:3003/api/users/

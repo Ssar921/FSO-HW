@@ -3,10 +3,24 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yWW9sbyIsImlkIjoiNmE4YTcwMGMxZWJlOWZjMTRiM2ViZTRlIiwiaWF0IjoxNzg3NDU3OTEzfQ.-3-AGKW27iTYwy-yg83AgGT9DeMjP9V7F0LggMAjtZA
 
 {
-	"title": "Token Auth Test Successful",
+	"title": "This is The First Post",
 	"author": "Shafaq Sarfraz",
-	"url": "http://tokenauth.com",
+	"url": "http://firstpost.com",
 	"likes": 10,
 	"userId": "6a8a700c1ebe9fc14b3ebe4e"
 }
 
+
+
+###
+POST http://localhost:3003/api/blogs/
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhbXphU2FyIiwiaWQiOiI2YThlOGRmZDA2N2FhNzFhNDIwZmQ2YTAiLCJpYXQiOjE3ODc3MjczNjMsImV4cCI6MTc4NzczMDk2M30.-iizUwI6_dNOQCTp-RbRums74xu2QGfKGrjDJNDWs-4
+
+{
+	"title": "This is A Pretentious Post",
+	"author": "Hamza Sarfraz",
+	"url": "http://pretentiouspost.com",
+	"likes": 10,
+	"userId": "6a8e8d9d067aa71a420fd69f"
+}
