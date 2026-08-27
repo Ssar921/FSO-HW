@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs/
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yWW9sbyIsImlkIjoiNmE4YTcwMGMxZWJlOWZjMTRiM2ViZTRlIiwiaWF0IjoxNzg3NDU3OTEzfQ.-3-AGKW27iTYwy-yg83AgGT9DeMjP9V7F0LggMAjtZA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNoYWZTYXIiLCJpZCI6IjZhOGU4OTkzMmNjMDRkMmMzMjFlZWFiYiIsImlhdCI6MTc4NzgyMDM5MiwiZXhwIjoxNzg3ODIzOTkyfQ.U6AGlahOhOh5qTym4IsozFc_nNKFraAiomh08ppL4L0
 
 {
 	"title": "This is The First Post",
@@ -15,7 +15,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1yW
 ###
 POST http://localhost:3003/api/blogs/
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhbXphU2FyIiwiaWQiOiI2YThlOGRmZDA2N2FhNzFhNDIwZmQ2YTAiLCJpYXQiOjE3ODc3MjczNjMsImV4cCI6MTc4NzczMDk2M30.-iizUwI6_dNOQCTp-RbRums74xu2QGfKGrjDJNDWs-4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhbXphU2FyIiwiaWQiOiI2YThmZjkzNTY2NWNlODFmMjE3YTY1ZjIiLCJpYXQiOjE3ODc4MjA0MTgsImV4cCI6MTc4NzgyNDAxOH0.BwE5TmzWJ56YOjc1Z0mro773PM_FipMrkYnRKpJrQ2E
 
 {
 	"title": "This is A Pretentious Post",
