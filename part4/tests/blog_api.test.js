@@ -8,6 +8,21 @@ const helper = require("./test_helper");
 
 const api = supertest(app);
 
+const logUser = async () => {
+	const user = {
+		username: "ShafSar",
+		password: "mmm",
+	};
+
+	const userResponse = await api
+		.post("/api/login")
+		.send(user)
+		.expect(200)
+		.expect("Content-Type", /application\/json/);
+
+	return userResponse;
+};
+
 beforeEach(async () => {
 	await Blog.deleteMany({});
 
@@ -52,7 +67,13 @@ describe("GET SPECIFIC BLOGS:", () => {
 			.expect(200)
 			.expect("Content-Type", /application\/json/);
 
-		assert.deepStrictEqual(firstPost, dbPost.body);
+		// assert.deepStrictEqual(firstPost, dbPost.body); //doesnt work due to populate in post request api
+		assert.strictEqual(dbPost.body.id, firstPost.id);
+		assert.strictEqual(dbPost.body.title, firstPost.title);
+		assert.strictEqual(dbPost.body.author, firstPost.author);
+		assert.strictEqual(dbPost.body.url, firstPost.url);
+		assert.strictEqual(dbPost.body.likes, firstPost.likes);
+		assert.strictEqual(dbPost.body.user[0], firstPost.user[0].toString());
 	});
 
 	test("blogs have id instead of _id", async () => {
@@ -63,7 +84,9 @@ describe("GET SPECIFIC BLOGS:", () => {
 	});
 });
 
-describe("POST REQUEST TESTS:", () => {
+describe("POST REQUEST TESTS:", async () => {
+	const userResponse = await logUser();
+
 	test("a new blog can be added after refactoring", async () => {
 		const newPost = {
 			title: "async/await simplifies making async calls",
@@ -74,6 +97,7 @@ describe("POST REQUEST TESTS:", () => {
 
 		await api
 			.post("/api/blogs")
+			.set("Authorization", `Bearer ${userResponse.body.token}`)
 			.send(newPost)
 			.expect(201)
 			.expect("Content-Type", /application\/json/);
@@ -92,7 +116,12 @@ describe("POST REQUEST TESTS:", () => {
 			url: "http://zero-likes.com",
 		};
 
-		const response = await api.post("/api/blogs").send(newPost).expect(201);
+		const response = await api
+			.post("/api/blogs")
+			.set("Authorization", `Bearer ${userResponse.body.token}`)
+			.send(newPost)
+			.expect(201);
+
 		assert.strictEqual(response.body.likes, 0);
 	});
 
@@ -103,7 +132,11 @@ describe("POST REQUEST TESTS:", () => {
 			likes: 14,
 		};
 
-		await api.post("/api/blogs").send(newPost).expect(400);
+		await api
+			.post("/api/blogs")
+			.set("Authorization", `Bearer ${userResponse.body.token}`)
+			.send(newPost)
+			.expect(400);
 
 		const response = await helper.blogsInDb();
 		assert.strictEqual(response.length, helper.initialPosts.length);
@@ -116,7 +149,11 @@ describe("POST REQUEST TESTS:", () => {
 			likes: 14,
 		};
 
-		await api.post("/api/blogs").send(newPost).expect(400);
+		await api
+			.post("/api/blogs")
+			.set("Authorization", `Bearer ${userResponse.body.token}`)
+			.send(newPost)
+			.expect(400);
 
 		const response = await helper.blogsInDb();
 		assert.strictEqual(response.length, helper.initialPosts.length);
@@ -130,6 +167,7 @@ describe("POST REQUEST TESTS:", () => {
 
 		await api
 			.put(`/api/blogs/${postToUpdate.id}`)
+			.set("Authorization", `Bearer ${userResponse.body.token}`)
 			.send({
 				[updateField]: postToUpdate.likes + 1,
 			})
@@ -148,10 +186,15 @@ describe("POST REQUEST TESTS:", () => {
 });
 
 test("a blog can be deleted", async () => {
+	const userResponse = await logUser();
+
 	const response = await helper.blogsInDb();
 	const postToDelete = response[0];
 
-	await api.delete(`/api/blogs/${postToDelete.id}`).expect(204);
+	await api
+		.delete(`/api/blogs/${postToDelete.id}`)
+		.set("Authorization", `Bearer ${userResponse.body.token}`)
+		.expect(204);
 
 	const finalPosts = await helper.blogsInDb();
 

@@ -7,12 +7,21 @@ const initialPosts = [
 		author: "Shafaq Sarfraz",
 		url: "http://blogspot.com",
 		likes: 24,
+		user: "6a9164bc3e3f67ac956e68f4",
 	},
 	{
 		title: "The Next Blog Post",
 		author: "Aliza Khan",
 		url: "http://blogspot-aliza.com",
 		likes: "13",
+		user: "6a8e8d9d067aa71a420fd69f",
+	},
+	{
+		title: "Third  Post",
+		author: "Jack Khan",
+		url: "http://liza.com",
+		likes: "13",
+		user: "6a8e8d9d067aa71a420fd69f",
 	},
 ];
 

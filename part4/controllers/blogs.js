@@ -38,7 +38,7 @@ blogsRouter.post("/", userExtractor, async (request, response) => {
 	response.status(201).json(result);
 });
 
-blogsRouter.delete("/:id", async (request, response) => {
+blogsRouter.delete("/:id", userExtractor, async (request, response) => {
 	const user = request.user;
 	const blog = await Blog.findById(request.params.id);
 
@@ -64,15 +64,22 @@ blogsRouter.get("/:id", async (request, response) => {
 	}
 });
 
-blogsRouter.put("/:id", async (request, response) => {
-	const newPerson = await Blog.findByIdAndUpdate(
-		request.params.id,
-		request.body,
-		{
-			returnDocument: "after",
-		},
-	);
-	response.json(newPerson);
+blogsRouter.put("/:id", userExtractor, async (request, response) => {
+	const user = request.user;
+	const blog = await Blog.findById(request.params.id);
+
+	if (blog.user.toString() === user._id.toString()) {
+		const newBlog = await Blog.findByIdAndUpdate(
+			request.params.id,
+			request.body,
+			{
+				returnDocument: "after",
+			},
+		);
+		response.status(200).json(newBlog);
+	} else {
+		return response.status(401).json({ error: "unauthorized" });
+	}
 });
 
 module.exports = blogsRouter;
